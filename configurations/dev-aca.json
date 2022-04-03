@@ -1,15 +1,42 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "location": {
-        "value": "westeurope"
-      },
-      "prefix": {
-        "value": "lmbd-dev"
-      },
-      "vNetId": {
-        "value": "/subscriptions/469048f1-92af-4c71-a63b-330ec31d2b82/resourceGroups/lambda-api-dev/providers/Microsoft.Network/virtualNetworks/lmbd-dev-vnet"
-      }
-    }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "westeurope"
+    },
+    "prefix": {
+      "value": "lmbd-dev"
+    },
+    "vNetId": {
+      "value": "/subscriptions/469048f1-92af-4c71-a63b-330ec31d2b82/resourceGroups/lambda-api-dev/providers/Microsoft.Network/virtualNetworks/lmbd-dev-vnet"
+    },
+    "containerRegistryName": {
+      "value": "lmbddevacr"
+    },
+    "containerRegistryUsername": {
+      "value": "lmbddevacr"
+    },
+    "containerVersion": {
+      "value": "1.6.0"
+    },
+    "cosmosAccountName": {
+      "value": "lmbd-dev-cosmos-account"
+    },
+    "cosmosDbName": {
+      "value": "lmbd-dev-sqldb"
+    },
+    "cosmosContainerName": {
+      "value": "lmbd-dev-state"
+    },
+
+    "containerRegistryPassword": {
+      "reference": {
+          "keyVault": {
+              "id": "/subscriptions/469048f1-92af-4c71-a63b-330ec31d2b82/resourceGroups/lambda-api-dev/providers/Microsoft.KeyVault/vaults/lmbd-dev-kv"
+                  },
+                  "secretName": "acrAdminPassword"
+              }
+       }
+  }
 }

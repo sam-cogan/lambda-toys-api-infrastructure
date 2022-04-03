@@ -7,6 +7,9 @@
       },
       "prefix": {
         "value": "lmbd-dev"
+      },
+      "containerVersion": {
+        "value": "1.6.0"
       }
     }
 }

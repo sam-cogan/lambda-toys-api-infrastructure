@@ -25,6 +25,20 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-0
   location: location
   properties: {
     securityRules: [
+      {
+        name: 'allowhttpsinbound'
+        properties:{
+          direction: 'Inbound'
+          access: 'Allow'
+          protocol: 'Tcp'
+          description: 'Allow https traffic into API'
+          sourceAddressPrefix: '*'
+          sourcePortRange: '*'
+          destinationPortRange: '443'
+          destinationAddressPrefix: '*'
+          priority: 200
+        }
+      }
     ]
   }
 }
@@ -101,6 +115,23 @@ resource sqlContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/co
     options: {}
   }
 }
+
+resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2021-06-15' = {
+  parent: sqlDb 
+  name: '${prefix}-state'
+  properties: {
+    resource: {
+      id: '${prefix}-state'
+      partitionKey: {
+        paths: [
+          '/partitionKey'
+        ]
+      }
+    }
+    options: {}
+  }
+}
+
 
 resource cosmosPrivateDns 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: 'privatelink.documents.azure.com'
@@ -191,3 +222,12 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   }
 }
 
+output vNetId string = virtualNetwork.id
+output ContainerRegistryName string = containerRegistry.name
+output ContainerRegistryUsename string = containerRegistry.name
+output SecretKeyVaultName string = keyVault.name
+output ContainerRegistrySecret string = split(keyVaultSecret.name,'/')[1]
+output CosmosAccountName string = cosmosDbAccount.name
+output ComosDbName string = sqlDb.name
+output CosmosStateContainerName string = stateContainerName.name
+output CosmosSqlContainerName string = sqlContainerName.name
