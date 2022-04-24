@@ -20,6 +20,11 @@ param vnetSettings object = {
   ]
 }
 param containerVersion string
+param tier string = 'Consumption'
+param capacity int = 0
+param externalResourcesRg string
+param certKeyVaultName string
+param certKeyVaultUrl string
 
 module core 'core.bicep' = {
   name: 'core'
@@ -53,4 +58,22 @@ module aca 'aca.bicep' = {
     cosmosDbName: core.outputs.ComosDbName
     containerRegistryPassword: secretKeyVault.getSecret(core.outputs.ContainerRegistrySecret)
   }
+}
+
+module apim 'apim.bicep'={
+  name: 'apim'
+  dependsOn:[
+    core
+  ]
+  params:{
+    location: location
+    prefix: prefix
+    certKeyVaultName: certKeyVaultName
+    certKeyVaultUrl: certKeyVaultUrl
+    externalResourcesRg: externalResourcesRg
+    capacity: capacity
+    tier: tier
+
+  }
+
 }

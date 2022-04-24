@@ -8,9 +8,6 @@
       "prefix": {
         "value": "lmbd-dev"
       },
-      "containerVersion": {
-        "value": "1.6.0"
-      },
       "certKeyVaultName": {
         "value": "deploymentkvsc01"
       },
@@ -20,5 +17,6 @@
       "certKeyVaultUrl": {
         "value": "https://deploymentkvsc01.vault.azure.net/secrets/lambdatoys"
       }
+
     }
-}
+}   
