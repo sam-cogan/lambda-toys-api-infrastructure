@@ -21,4 +21,4 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az group create --name $(resourceGroupName) --location $(location)
-      az deployment create --resource-group $(resourceGroupName) --template-file .\infrastructure\main.bicep --template-parmaters @configurations\dev.json
+      az deployment group create --resource-group $(resourceGroupName) --template-file .\infrastructure\main.bicep --template-parmaters @configurations\dev.json
