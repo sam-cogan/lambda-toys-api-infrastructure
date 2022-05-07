@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+ resourceGroupName: 'lambda-api-dev'
+ location: 'westeurope'
+ 
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Azure Sponsorship'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group create --name $(resourceGroupName) --location $(location)
+      az deployment create --resource-group $(resourceGroupName) --template-file .\infrastructure\main.bicep --template-parmaters @configurations\dev.json
