@@ -9,16 +9,40 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
- resourceGroupName: 'lambda-api-dev'
- location: 'westeurope'
- 
-steps:
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Azure Sponsorship'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az group create --name $(resourceGroupName) --location $(location)
-      az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/dev.json
+
+stages:
+- stage: Development
+  displayName: Development Environment
+  variables:
+    resourceGroupName: 'lambda-api-dev'
+    location: 'westeurope'
+    configFileName: 'dev.json'
+  jobs:
+    job:
+      steps:
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'Azure Sponsorship'
+          scriptType: 'pscore'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az group create --name $(resourceGroupName) --location $(location)
+            az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
+- stage: Test
+  displayName: Test Environment
+  dependsOn: Development
+  variables:
+    resourceGroupName: 'lambda-api-test'
+    location: 'northeurope'
+    configFileName: 'test.json'
+  jobs:
+    job:
+      steps:
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'Azure Sponsorship'
+          scriptType: 'pscore'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az group create --name $(resourceGroupName) --location $(location)
+            az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
