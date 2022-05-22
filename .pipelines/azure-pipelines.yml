@@ -33,7 +33,7 @@ stages:
   dependsOn: Development
   variables:
     resourceGroupName: 'lambda-api-test'
-    location: 'northeurope'
+    location: 'westeurope'
     configFileName: 'test.json'
   jobs:
   - job:
