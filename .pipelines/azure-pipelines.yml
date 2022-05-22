@@ -55,14 +55,17 @@ stages:
     location: 'westeurope'
     configFileName: 'prod.json'
   jobs:
-  - job:
+  - deployment:
     environment: 'Lambda Toys Production'
-    steps:
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'Azure Sponsorship'
-        scriptType: 'pscore'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          az group create --name $(resourceGroupName) --location $(location)
-          az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'Azure Sponsorship'
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group create --name $(resourceGroupName) --location $(location)
+                az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
