@@ -18,7 +18,7 @@ stages:
     location: 'westeurope'
     configFileName: 'dev.json'
   jobs:
-    job:
+  - job:
       steps:
       - task: AzureCLI@2
         inputs:
@@ -36,7 +36,7 @@ stages:
     location: 'northeurope'
     configFileName: 'test.json'
   jobs:
-    job:
+  - job:
       steps:
       - task: AzureCLI@2
         inputs:
