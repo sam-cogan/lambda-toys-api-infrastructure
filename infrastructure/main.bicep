@@ -55,7 +55,7 @@ module aca 'aca.bicep' = {
     prefix: prefix
     vNetId: core.outputs.vNetId
     containerRegistryName: containerRegistryName
-    containerRegistryUsername: containerRegistryPassword
+    containerRegistryUsername: containerRegistryUsername
     containerVersion: containerVersion
     cosmosAccountName: core.outputs.CosmosAccountName
     cosmosContainerName: core.outputs.CosmosStateContainerName
