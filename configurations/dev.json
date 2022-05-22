@@ -9,7 +9,7 @@
         "value": "lmbd-dev01"
       },
       "containerVersion": {
-        "value": "1.6.0"
+        "value": "1.7.0"
       },
       "certKeyVaultName": {
         "value": "deploymentkvsc01"
@@ -21,10 +21,10 @@
         "value": "https://deploymentkvsc01.vault.azure.net/secrets/lambdatoys"
       },
       "containerRegistryName":{
-        "value": "lambdatoysprod"
+        "value": "lambdatoysdev"
       },
       "containerRegistryUsername" :{
-        "value": "lambdatoysprod"
+        "value": "lambdatoysdev"
       },
       "containerRegistryPassword": {
         "reference": {
