@@ -19,15 +19,15 @@ stages:
     configFileName: 'dev.json'
   jobs:
   - job:
-      steps:
-      - task: AzureCLI@2
-        inputs:
-          azureSubscription: 'Azure Sponsorship'
-          scriptType: 'pscore'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            az group create --name $(resourceGroupName) --location $(location)
-            az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure Sponsorship'
+        scriptType: 'pscore'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az group create --name $(resourceGroupName) --location $(location)
+          az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
 - stage: Test
   displayName: Test Environment
   dependsOn: Development
@@ -37,12 +37,12 @@ stages:
     configFileName: 'test.json'
   jobs:
   - job:
-      steps:
-      - task: AzureCLI@2
-        inputs:
-          azureSubscription: 'Azure Sponsorship'
-          scriptType: 'pscore'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            az group create --name $(resourceGroupName) --location $(location)
-            az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure Sponsorship'
+        scriptType: 'pscore'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az group create --name $(resourceGroupName) --location $(location)
+          az deployment group create --resource-group $(resourceGroupName) --template-file ./infrastructure/main.bicep --parameters ./configurations/$(configFileName)
