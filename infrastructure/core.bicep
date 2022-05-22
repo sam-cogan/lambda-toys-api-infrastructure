@@ -188,16 +188,7 @@ resource cosmosPrivateEndpointDnsLink 'Microsoft.Network/privateEndpoints/privat
   }
 }
 
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-06-01-preview' = {
-  name: '${replace(prefix,'-','')}acr'
-  location: location
-  sku: {
-    name: 'Basic'
-  }
-  properties: {
-    adminUserEnabled: true
-  }
-}
+
 
 resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: '${prefix}-kv'
@@ -215,18 +206,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
-resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
-  name: '${keyVault.name}/acrAdminPassword'
-  properties: {
-    value: containerRegistry.listCredentials().passwords[0].value
-  }
-}
+
 
 output vNetId string = virtualNetwork.id
-output ContainerRegistryName string = containerRegistry.name
-output ContainerRegistryUsename string = containerRegistry.name
 output SecretKeyVaultName string = keyVault.name
-output ContainerRegistrySecret string = split(keyVaultSecret.name,'/')[1]
 output CosmosAccountName string = cosmosDbAccount.name
 output ComosDbName string = sqlDb.name
 output CosmosStateContainerName string = stateContainerName.name

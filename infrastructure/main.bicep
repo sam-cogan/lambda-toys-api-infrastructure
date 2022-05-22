@@ -25,6 +25,10 @@ param capacity int = 0
 param externalResourcesRg string
 param certKeyVaultName string
 param certKeyVaultUrl string
+param containerRegistryName string
+param containerRegistryUsername string
+@secure()
+param containerRegistryPassword string
 
 module core 'core.bicep' = {
   name: 'core'
@@ -50,13 +54,13 @@ module aca 'aca.bicep' = {
     location: location
     prefix: prefix
     vNetId: core.outputs.vNetId
-    containerRegistryName: core.outputs.ContainerRegistryName
-    containerRegistryUsername: core.outputs.ContainerRegistryUsename
+    containerRegistryName: containerRegistryName
+    containerRegistryUsername: containerRegistryPassword
     containerVersion: containerVersion
     cosmosAccountName: core.outputs.CosmosAccountName
     cosmosContainerName: core.outputs.CosmosStateContainerName
     cosmosDbName: core.outputs.ComosDbName
-    containerRegistryPassword: secretKeyVault.getSecret(core.outputs.ContainerRegistrySecret)
+    containerRegistryPassword: containerRegistryPassword
   }
 }
 
