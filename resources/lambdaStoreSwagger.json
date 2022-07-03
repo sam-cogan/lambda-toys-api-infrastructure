@@ -326,12 +326,8 @@
                     "404": {
                         "description": "toy not found"
                     }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
+                }
+           
             },
             "post": {
                 "tags": [
@@ -551,7 +547,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [],
+              
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -563,12 +559,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
+                }
             }
         },
         "/user/createWithArray": {
@@ -815,7 +806,7 @@
                     "application/json",
                     "application/xml"
                 ],
-                "parameters": [],
+          
                 "responses": {
                     "default": {
                         "description": "successful operation"
