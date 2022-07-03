@@ -1,0 +1,24 @@
+trigger: none
+
+pr:
+  paths:
+    include:
+      - infrastructure
+      - configurations 
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: RunARMTTKTestsXPlat@1
+  inputs:
+    templatelocation: '$(System.DefaultWorkingDirectory)\infrastructure'
+    resultLocation: '$(System.DefaultWorkingDirectory)\results'
+    allTemplatesMain: false
+- task: PublishTestResults@2
+  name: PublishTTKTests
+  displayName: Publish TTK Test Results
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
+  condition: always()
