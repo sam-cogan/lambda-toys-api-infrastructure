@@ -16,10 +16,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      bicep build $(System.DefaultWorkingDirectory)\infrastructure\mainTemplate.bicep
+      bicep build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
 - task: RunARMTTKTestsXPlat@1
   inputs:
-    templatelocation: '$(System.DefaultWorkingDirectory)\infrastructure\mainTemplate.bicep'
+    templatelocation: '$(System.DefaultWorkingDirectory)\infrastructure\main.bicep'
     resultLocation: '$(System.DefaultWorkingDirectory)\results'
     allTemplatesMain: false
 - task: PublishTestResults@2
