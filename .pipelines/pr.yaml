@@ -10,13 +10,6 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: PowerShell@2
-  name: CompileTemplate
-  displayName: Compile & Lint Template
-  inputs:
-    targetType: 'inline'
-    script: |
-      bicep build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
 - task: RunARMTTKTestsXPlat@1
   inputs:
     templatelocation: '$(System.DefaultWorkingDirectory)\infrastructure\main.bicep'

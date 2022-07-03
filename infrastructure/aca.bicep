@@ -119,5 +119,3 @@ resource apiApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
   }
 
 }
-
-output apiUrl string = apiApp.properties.configuration.ingress.fqdn
