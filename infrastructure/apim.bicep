@@ -55,11 +55,13 @@ resource apiManagementInstance 'Microsoft.ApiManagement/service@2021-08-01' = {
   }
 }
 
+var base64_api=loadFileAsBase64('../resources/lambdaStoreSwagger.json')
+
 resource lambdaStoreApi 'Microsoft.ApiManagement/service/apis@2020-12-01' = {
   name:'${apiManagementInstance.name}/LambdaStore'
   properties:{
     format: 'swagger-json'
-    value: loadTextContent('../resources/lambdaStoreSwagger.json')
+    value: base64ToString(base64_api)
     path: 'lambdaToyStore'
   }
 
