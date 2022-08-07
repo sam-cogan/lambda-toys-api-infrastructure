@@ -4,7 +4,7 @@ pr:
   paths:
     include:
       - infrastructure
-      - configurations 
+      - configurations
 
 pool:
   vmImage: 'windows-latest'
