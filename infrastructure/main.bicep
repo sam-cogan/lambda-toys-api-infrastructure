@@ -43,8 +43,6 @@ module core 'core.bicep' = {
 resource secretKeyVault 'Microsoft.KeyVault/vaults@2019-09-01' existing = {
  name: '${prefix}-kv'
 }
-
-
 module aca 'aca.bicep' = {
   name: 'aca'
   dependsOn:[

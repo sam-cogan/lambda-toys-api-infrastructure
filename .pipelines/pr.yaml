@@ -1,0 +1,32 @@
+trigger: none
+
+pr:
+  paths:
+    include:
+      - infrastructure
+      - configurations
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+# - task: PowerShell@2
+#   name: CompileTemplate
+#   displayName: Compile & Lint Template
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       bicep.exe build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
+- task: RunARMTTKTestsXPlat@1
+  inputs:
+    templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
+    resultLocation: '$(System.DefaultWorkingDirectory)/results'
+    allTemplatesMain: false
+- task: PublishTestResults@2
+  name: PublishTTKTests
+  displayName: Publish TTK Test Results
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/results/*-armttk.xml'
+  condition: always()

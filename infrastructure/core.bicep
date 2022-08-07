@@ -20,7 +20,7 @@ param vnetSettings object = {
   ]
 }
 
-resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
   name: '${prefix}-default-nsg'
   location: location
   properties: {
@@ -44,7 +44,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-0
 }
 
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2019-11-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   name: '${prefix}-vnet'
   location: location
   properties: {
@@ -95,8 +95,6 @@ resource sqlDb 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2021-06-15' =
     resource: {
       id: '${prefix}-sqldb'
     }
-    options: {
-    }
   }
 }
 
@@ -112,7 +110,7 @@ resource sqlContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/co
         ]
       }
     }
-    options: {}
+
   }
 }
 
@@ -128,7 +126,7 @@ resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/
         ]
       }
     }
-    options: {}
+    
   }
 }
 
@@ -138,7 +136,7 @@ resource cosmosPrivateDns 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   location: 'global'
 }
 
-resource cosmosPrivateDnsNetworkLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
+resource cosmosPrivateDnsNetworkLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   name: '${prefix}-cosmos-dns-link'
   location: 'global'
   parent: cosmosPrivateDns
@@ -150,7 +148,7 @@ resource cosmosPrivateDnsNetworkLink 'Microsoft.Network/privateDnsZones/virtualN
   }
 }
 
-resource cosmosPrivateEndpoint 'Microsoft.Network/privateEndpoints@2019-04-01'  = {
+resource cosmosPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01'  = {
   name: '${prefix}-cosmos-pe'
   location: location
   properties: {

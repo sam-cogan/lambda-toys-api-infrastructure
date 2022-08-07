@@ -106,7 +106,7 @@ resource apiApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
           image: '${containerRegistryName}.azurecr.io/hello-k8s-node:${containerVersion}'
           name: 'lambdaapi'
           resources: {
-            cpu: '0.5'
+            cpu: 1
             memory: '1Gi'
           }
 
@@ -119,5 +119,3 @@ resource apiApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
   }
 
 }
-
-output apiUrl string = apiApp.properties.configuration.ingress.fqdn
