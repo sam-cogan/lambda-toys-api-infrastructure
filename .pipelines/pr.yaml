@@ -20,13 +20,13 @@ steps:
 #       bicep.exe build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
 - task: RunARMTTKTestsXPlat@1
   inputs:
-    templatelocation: '$(System.DefaultWorkingDirectory)\infrastructure\main.bicep'
-    resultLocation: '$(System.DefaultWorkingDirectory)\results'
+    templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
+    resultLocation: '$(System.DefaultWorkingDirectory)/results'
     allTemplatesMain: false
 - task: PublishTestResults@2
   name: PublishTTKTests
   displayName: Publish TTK Test Results
   inputs:
     testResultsFormat: 'NUnit'
-    testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/results/*-armttk.xml'
   condition: always()
