@@ -7,7 +7,7 @@ pr:
       - configurations
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
 
