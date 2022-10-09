@@ -61,11 +61,11 @@ steps:
      **/*-armttk.xml
      $(Agent.BuildDirectory)/Test-Infra.XML
   condition: always()
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Azure Sponsorship'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az group create delete --name "lambda-api-infra" 
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'Azure Sponsorship'
+#     scriptType: 'pscore'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       az group create delete --name "lambda-api-infra" 
       
