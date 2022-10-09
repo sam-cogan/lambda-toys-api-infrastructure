@@ -37,8 +37,8 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
       }
     }
    vnetConfiguration:{
-     runtimeSubnetId: '${resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName)}/subnets/acaAppSubnet'
-     infrastructureSubnetId: '${resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName)}/subnets/acaControlPlaneSubnet'
+     runtimeSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'/subnets/acaAppSubnet')
+     infrastructureSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'/subnets/acaControlPlaneSubnet')
     }
   }
   resource daprStateStore 'daprComponents@2022-03-01' = {
