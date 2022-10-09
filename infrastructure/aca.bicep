@@ -107,7 +107,7 @@ resource apiApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
           name: 'lambdaapi'
           resources: {
             cpu: 1
-            memory: '1Gi'
+            memory: '2Gi'
           }
 
         }
