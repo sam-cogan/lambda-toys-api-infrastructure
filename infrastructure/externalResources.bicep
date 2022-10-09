@@ -29,7 +29,7 @@ var roleIds = [
   '4633458b-17de-408a-b874-0445c86b69e6' //Key Vault Secret User
 ]
 
-resource kvroleAssignment'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = [ for roleId in roleIds :{
+resource kvroleAssignment'Microsoft.Authorization/roleAssignments@2022-04-01' = [ for roleId in roleIds :{
   name: guid(keyVaultName, managedIdentityId, roleId)
   scope: keyVault 
   properties: {
