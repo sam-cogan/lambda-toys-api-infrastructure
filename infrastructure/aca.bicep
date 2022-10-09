@@ -1,6 +1,6 @@
 param location string
 param prefix string
-param vNetId string
+param vNetName string
 param containerRegistryName string
 param containerRegistryUsername string
 @secure()
@@ -37,8 +37,8 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
       }
     }
    vnetConfiguration:{
-     runtimeSubnetId:'${vNetId}/subnets/acaAppSubnet'
-     infrastructureSubnetId:'${vNetId}/subnets/acaControlPlaneSubnet'
+     runtimeSubnetId: '${resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName)}/subnets/acaAppSubnet'
+     infrastructureSubnetId: '${resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName)}/subnets/acaControlPlaneSubnet'
     }
   }
   resource daprStateStore 'daprComponents@2022-03-01' = {

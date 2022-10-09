@@ -33,8 +33,10 @@ resource kvroleAssignment'Microsoft.Authorization/roleAssignments@2022-04-01' = 
   name: guid(keyVaultName, managedIdentityId, roleId)
   scope: keyVault 
   properties: {
-    roleDefinitionId: '/providers/Microsoft.Authorization/roleDefinitions/${roleId}'
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions',roleId) 
     principalId: managedIdentityId
     principalType: 'ServicePrincipal'
   }
 }]
+
+
