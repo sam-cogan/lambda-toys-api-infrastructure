@@ -64,6 +64,7 @@ steps:
      **/Test-Infra.XML
   condition: always()
 
+
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Azure Sponsorship'
