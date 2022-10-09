@@ -48,7 +48,7 @@ module aca 'aca.bicep' = {
   params: {
     location: location
     prefix: prefix
-    vNetId: core.outputs.vNetId
+    vNetName: core.outputs.vNetName
     containerRegistryName: containerRegistryName
     containerRegistryUsername: containerRegistryUsername
     containerVersion: containerVersion
