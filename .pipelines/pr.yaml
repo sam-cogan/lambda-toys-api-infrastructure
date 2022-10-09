@@ -65,10 +65,10 @@ steps:
   condition: always()
 
 - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'Azure Sponsorship'
-        scriptType: 'pscore'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          az group create delete --name "lambda-api-infra" 
-         
+  inputs:
+    azureSubscription: 'Azure Sponsorship'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group create delete --name "lambda-api-infra" 
+      
