@@ -40,9 +40,6 @@ module core 'core.bicep' = {
   
 }
 
-resource secretKeyVault 'Microsoft.KeyVault/vaults@2019-09-01' existing = {
- name: '${prefix}-kv'
-}
 module aca 'aca.bicep' = {
   name: 'aca'
   dependsOn:[
@@ -51,7 +48,7 @@ module aca 'aca.bicep' = {
   params: {
     location: location
     prefix: prefix
-    vNetId: core.outputs.vNetId
+    vNetName: core.outputs.vNetName
     containerRegistryName: containerRegistryName
     containerRegistryUsername: containerRegistryUsername
     containerVersion: containerVersion

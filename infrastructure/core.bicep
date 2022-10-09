@@ -207,6 +207,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
 
 
 output vNetId string = virtualNetwork.id
+output vNetName string = virtualNetwork.name
 output SecretKeyVaultName string = keyVault.name
 output CosmosAccountName string = cosmosDbAccount.name
 output ComosDbName string = sqlDb.name
