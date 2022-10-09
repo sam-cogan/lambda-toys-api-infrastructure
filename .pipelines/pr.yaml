@@ -31,7 +31,7 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az group create --name "lambda-api-infra" --location "westeurope"
-      az deployment group create --resource-group "lambda-api-dev" --template-file ./infrastructure/main.bicep --parameters ./configurations/infra-test.json
+      az deployment group create --resource-group "lambda-api-infra" --template-file ./infrastructure/main.bicep --parameters ./configurations/infra-test.json
 
 - task: AzurePowerShell@5
   displayName: 'Test Infrastructure'
