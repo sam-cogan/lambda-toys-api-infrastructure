@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "value": "westeurope"
+      },
+      "prefix": {
+        "value": "lmbd-infra01"
+      },
+      "containerVersion": {
+        "value": "1.7.0"
+      },
+      "certKeyVaultName": {
+        "value": "deploymentkvsc01"
+      },
+      "externalResourcesRg": {
+        "value": "samcogancore"
+      },
+      "certKeyVaultUrl": {
+        "value": "https://deploymentkvsc01.vault.azure.net/secrets/lambdatoys"
+      },
+      "containerRegistryName":{
+        "value": "lambdatoysdev"
+      },
+      "containerRegistryUsername" :{
+        "value": "lambdatoysdev"
+      },
+      "containerRegistryPassword": {
+        "reference": {
+            "keyVault": {
+                "id": "/subscriptions/469048f1-92af-4c71-a63b-330ec31d2b82/resourceGroups/samcogancore/providers/Microsoft.KeyVault/vaults/deploymentkvsc01"
+                    },
+                    "secretName": "lambdaAcrDev"
+                }
+         }
+
+    }
+}
