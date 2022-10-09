@@ -85,6 +85,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' = {
         name: 'EnableServerless'
       }
     ]
+    publicNetworkAccess: 'Disabled'
   }
 }
 
