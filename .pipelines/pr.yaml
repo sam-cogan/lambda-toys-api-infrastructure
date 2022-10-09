@@ -18,11 +18,11 @@ steps:
 #     targetType: 'inline'
 #     script: |
 #       bicep.exe build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
-- task: RunARMTTKTestsXPlat@1
-  inputs:
-    templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
-    resultLocation: '$(System.DefaultWorkingDirectory)/results'
-    allTemplatesMain: false
+# - task: RunARMTTKTestsXPlat@1
+#   inputs:
+#     templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
+#     resultLocation: '$(System.DefaultWorkingDirectory)/results'
+#     allTemplatesMain: false
 
 - task: AzureCLI@2
   inputs:
