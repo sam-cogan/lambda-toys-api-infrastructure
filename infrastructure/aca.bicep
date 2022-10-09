@@ -25,7 +25,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' exis
 }
 var cosmosDbKey = cosmosDbAccount.listKeys().primaryMasterKey
 
-resource env 'Microsoft.App/managedEnvironments@2022-01-01-preview' = {
+resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
   name: '${prefix}-container-env'
   location: location
   properties:{
@@ -41,7 +41,7 @@ resource env 'Microsoft.App/managedEnvironments@2022-01-01-preview' = {
      infrastructureSubnetId:'${vNetId}/subnets/acaControlPlaneSubnet'
     }
   }
-  resource daprStateStore 'daprComponents@2022-01-01-preview' = {
+  resource daprStateStore 'daprComponents@2022-03-01' = {
       name: 'statestore'
       properties:{
         componentType: 'state.azure.cosmosdb'
@@ -71,7 +71,7 @@ resource env 'Microsoft.App/managedEnvironments@2022-01-01-preview' = {
     }
   }
 
-resource apiApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
+resource apiApp 'Microsoft.App/containerApps@2022-03-01' = {
   name:'${prefix}-api-container'
   location: location
   properties:{
