@@ -67,7 +67,7 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az group create delete --name "lambda-api-infra" 
+      az group delete --name "lambda-api-infra" 
   condition: always()
 
       
