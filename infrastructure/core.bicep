@@ -131,7 +131,7 @@ resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/
   }
 }
 
-module cosmosPrivateLink '../modules/private-endpoint.bicep' ={
+module cosmosPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateEndpoint:v1' ={
   name: 'cosmosPrivateLink'
   params:{
     location:location
@@ -162,7 +162,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
-module keyVaultPrivateLink '../modules/private-endpoint.bicep' ={
+module keyVaultPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateEndpoint:v1' ={
   name: 'keyVaultPrivateLink'
   params:{
     location:location
