@@ -69,4 +69,5 @@ steps:
     inlineScript: |
       az group create delete --name "lambda-api-infra" 
   condition: always()
+
       
