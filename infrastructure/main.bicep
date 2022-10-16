@@ -40,39 +40,39 @@ module core 'core.bicep' = {
   
 }
 
-module aca 'aca.bicep' = {
-  name: 'aca'
-  dependsOn:[
-    core
-  ]
-  params: {
-    location: location
-    prefix: prefix
-    vNetName: core.outputs.vNetName
-    containerRegistryName: containerRegistryName
-    containerRegistryUsername: containerRegistryUsername
-    containerVersion: containerVersion
-    cosmosAccountName: core.outputs.CosmosAccountName
-    cosmosContainerName: core.outputs.CosmosStateContainerName
-    cosmosDbName: core.outputs.ComosDbName
-    containerRegistryPassword: containerRegistryPassword
-  }
-}
+// module aca 'aca.bicep' = {
+//   name: 'aca'
+//   dependsOn:[
+//     core
+//   ]
+//   params: {
+//     location: location
+//     prefix: prefix
+//     vNetName: core.outputs.vNetName
+//     containerRegistryName: containerRegistryName
+//     containerRegistryUsername: containerRegistryUsername
+//     containerVersion: containerVersion
+//     cosmosAccountName: core.outputs.CosmosAccountName
+//     cosmosContainerName: core.outputs.CosmosStateContainerName
+//     cosmosDbName: core.outputs.ComosDbName
+//     containerRegistryPassword: containerRegistryPassword
+//   }
+// }
 
-module apim 'apim.bicep'={
-  name: 'apim'
-  dependsOn:[
-    core
-  ]
-  params:{
-    location: location
-    prefix: prefix
-    certKeyVaultName: certKeyVaultName
-    certKeyVaultUrl: certKeyVaultUrl
-    externalResourcesRg: externalResourcesRg
-    capacity: capacity
-    tier: tier
+// module apim 'apim.bicep'={
+//   name: 'apim'
+//   dependsOn:[
+//     core
+//   ]
+//   params:{
+//     location: location
+//     prefix: prefix
+//     certKeyVaultName: certKeyVaultName
+//     certKeyVaultUrl: certKeyVaultUrl
+//     externalResourcesRg: externalResourcesRg
+//     capacity: capacity
+//     tier: tier
 
-  }
+//   }
 
-}
+// }
