@@ -131,63 +131,20 @@ resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/
   }
 }
 
-
-resource cosmosPrivateDns 'Microsoft.Network/privateDnsZones@2020-06-01' = {
-  name: 'privatelink.documents.azure.com'
-  location: 'global'
-}
-
-resource cosmosPrivateDnsNetworkLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
-  name: '${prefix}-cosmos-dns-link'
-  location: 'global'
-  parent: cosmosPrivateDns
-  properties:{
-    registrationEnabled: false
-    virtualNetwork: {
-      id: virtualNetwork.id
-    }
-  }
-}
-
-resource cosmosPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01'  = {
-  name: '${prefix}-cosmos-pe'
-  location: location
-  properties: {
-    privateLinkServiceConnections: [
-      {
-        name: '${prefix}-cosmos-pe'
-        properties: {
-          privateLinkServiceId: cosmosDbAccount.id
-          groupIds: [
-            'SQL'
-          ]
-        }
-      }
+module cosmosPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint:v1' ={
+  name: 'cosmosPrivateLink'
+  params:{
+    location:location
+    name: '${prefix}-cosmos'
+    virtualNetworkId: virtualNetwork.id
+    subnetName: virtualNetwork.properties.subnets[0].name
+    zoneName: 'privatelink.documents.azure.com'
+    subResourceTypes:[
+       'SQL'
     ]
-    subnet: {
-      
-      id: virtualNetwork.properties.subnets[0].id
-    }
-  
+    resourceId: cosmosDbAccount.id
   }
 }
-
-resource cosmosPrivateEndpointDnsLink 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-03-01' = {
-  name:'${prefix}-cosmos-pe-dns'
-  parent: cosmosPrivateEndpoint
-  properties: {
-    privateDnsZoneConfigs: [
-      {
-        name: 'privatelink.documents.azure.com'
-        properties: {
-          privateDnsZoneId: cosmosPrivateDns.id
-        }
-      }
-    ]
-  }
-}
-
-
 
 resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: '${prefix}-kv'
@@ -205,7 +162,20 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
-
+module keyVaultPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint:v1' ={
+  name: 'keyVaultPrivateLink'
+  params:{
+    location:location
+    name: '${prefix}-keyvault'
+    virtualNetworkId: virtualNetwork.id
+    subnetName: virtualNetwork.properties.subnets[0].name
+    zoneName: 'privatelink.vaultcore.azure.net'
+    subResourceTypes:[
+       'vault'
+    ]
+    resourceId: keyVault.id
+  }
+}
 
 output vNetId string = virtualNetwork.id
 output vNetName string = virtualNetwork.name

@@ -18,11 +18,12 @@ steps:
 #     targetType: 'inline'
 #     script: |
 #       bicep.exe build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
-# - task: RunARMTTKTestsXPlat@1
-#   inputs:
-#     templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
-#     resultLocation: '$(System.DefaultWorkingDirectory)/results'
-#     allTemplatesMain: false
+- task: RunARMTTKTestsXPlat@1
+  inputs:
+    templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
+    resultLocation: '$(System.DefaultWorkingDirectory)/results'
+    allTemplatesMain: false
+    azureServiceConnection: 'Azure Sponsorship'
 
 - task: AzureCLI@2
   inputs:
@@ -61,11 +62,15 @@ steps:
      **/*-armttk.xml
      $(Agent.BuildDirectory)/Test-Infra.XML
   condition: always()
-# - task: AzureCLI@2
-#   inputs:
-#     azureSubscription: 'Azure Sponsorship'
-#     scriptType: 'pscore'
-#     scriptLocation: 'inlineScript'
-#     inlineScript: |
-#       az group create delete --name "lambda-api-infra" 
+- task: AzureCLI@2
+  name: DeleteInfra
+  displayName: Delete Test Infrastructure
+  inputs:
+    azureSubscription: 'Azure Sponsorship'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group delete --name "lambda-api-infra" --yes
+  condition: always()
+
       
