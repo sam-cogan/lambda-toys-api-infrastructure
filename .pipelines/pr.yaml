@@ -62,7 +62,8 @@ steps:
      $(Agent.BuildDirectory)/Test-Infra.XML
   condition: always()
 - task: AzureCLI@2
-  name: Delete Test Infrastructure
+  name: DeleteInfra
+  dispalyeName: Delete Test Infrastructure
   inputs:
     azureSubscription: 'Azure Sponsorship'
     scriptType: 'pscore'
