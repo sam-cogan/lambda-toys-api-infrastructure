@@ -23,6 +23,7 @@ steps:
     templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
     resultLocation: '$(System.DefaultWorkingDirectory)/results'
     allTemplatesMain: false
+    azureServiceConnection: 'Azure Sponsorship'
 
 - task: AzureCLI@2
   inputs:
@@ -69,7 +70,7 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az group delete --name "lambda-api-infra" 
+      az group delete --name "lambda-api-infra" --yes
   condition: always()
 
       
