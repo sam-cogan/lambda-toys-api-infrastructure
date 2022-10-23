@@ -18,11 +18,11 @@ steps:
 #     targetType: 'inline'
 #     script: |
 #       bicep.exe build $(System.DefaultWorkingDirectory)\infrastructure\main.bicep
-# - task: RunARMTTKTestsXPlat@1
-#   inputs:
-#     templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
-#     resultLocation: '$(System.DefaultWorkingDirectory)/results'
-#     allTemplatesMain: false
+- task: RunARMTTKTestsXPlat@1
+  inputs:
+    templatelocation: '$(System.DefaultWorkingDirectory)/infrastructure/main.bicep'
+    resultLocation: '$(System.DefaultWorkingDirectory)/results'
+    allTemplatesMain: false
 
 - task: AzureCLI@2
   inputs:
@@ -63,7 +63,7 @@ steps:
   condition: always()
 - task: AzureCLI@2
   name: DeleteInfra
-  dispalyeName: Delete Test Infrastructure
+  displayName: Delete Test Infrastructure
   inputs:
     azureSubscription: 'Azure Sponsorship'
     scriptType: 'pscore'
