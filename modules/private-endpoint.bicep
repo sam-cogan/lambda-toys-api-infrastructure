@@ -1,7 +1,7 @@
 param name string
 param location string
 param virtualNetworkId string
-param subnetName string
+param subnetId string
 param resourceId string
 param subResourceTypes array
 param zoneName string
@@ -38,7 +38,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01'  = {
     ]
     subnet: {
       
-      id: '${virtualNetworkId}/subnets/${subnetName}'
+      id: subnetId
     }
   
   }
