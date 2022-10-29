@@ -137,7 +137,7 @@ module cosmosPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint:v
     location:location
     name: '${prefix}-cosmos'
     virtualNetworkId: virtualNetwork.id
-    subnetName: virtualNetwork.properties.subnets[0].name
+    subnetId: virtualNetwork.properties.subnets[0].id
     zoneName: 'privatelink.documents.azure.com'
     subResourceTypes:[
        'SQL'
@@ -168,7 +168,7 @@ module keyVaultPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint
     location:location
     name: '${prefix}-keyvault'
     virtualNetworkId: virtualNetwork.id
-    subnetName: virtualNetwork.properties.subnets[0].name
+    subnetId: virtualNetwork.properties.subnets[0].id
     zoneName: 'privatelink.vaultcore.azure.net'
     subResourceTypes:[
        'vault'
