@@ -27,8 +27,17 @@ param certKeyVaultName string
 param certKeyVaultUrl string
 param containerRegistryName string
 param containerRegistryUsername string
-@secure()
-param containerRegistryPassword string
+param secretKeyVaultId string
+param secretName string
+
+var secretKeyVaultName = split(secretKeyVaultId, '/')[8]
+var secretKeyVaultResourceGroup = split(secretKeyVaultId, '/')[4]
+var secretKeyVautlSubscriptionId = split(secretKeyVaultId, '/')[2]
+
+resource kv 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+ name: secretKeyVaultName
+ scope: resourceGroup(secretKeyVautlSubscriptionId, secretKeyVaultResourceGroup)
+}
 
 module core 'core.bicep' = {
   name: 'core'
@@ -55,7 +64,7 @@ module aca 'aca.bicep' = {
     cosmosAccountName: core.outputs.CosmosAccountName
     cosmosContainerName: core.outputs.CosmosStateContainerName
     cosmosDbName: core.outputs.ComosDbName
-    containerRegistryPassword: containerRegistryPassword
+    containerRegistryPassword: kv.getSecret(secretName)
   }
 }
 
