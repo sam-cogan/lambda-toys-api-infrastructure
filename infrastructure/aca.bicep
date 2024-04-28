@@ -10,7 +10,7 @@ param cosmosAccountName string
 param cosmosDbName string
 param cosmosContainerName string
 
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${prefix}-la-workspace'
   location: location
   properties: {
