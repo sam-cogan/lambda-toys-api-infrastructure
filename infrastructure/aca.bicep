@@ -25,7 +25,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' exis
 }
 var cosmosDbKey = cosmosDbAccount.listKeys().primaryMasterKey
 
-resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
+resource env 'Microsoft.App/managedEnvironments@2023-05-01' = {
   name: '${prefix}-container-env'
   location: location
   properties:{
@@ -37,7 +37,6 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
       }
     }
    vnetConfiguration:{
-     runtimeSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'acaAppSubnet')
      infrastructureSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'acaControlPlaneSubnet')
     }
   }
