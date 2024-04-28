@@ -27,6 +27,7 @@ param certKeyVaultName string
 param certKeyVaultUrl string
 param containerRegistryName string
 param containerRegistryUsername string
+#disable-next-line secure-secrets-in-params
 param secretKeyVaultId string
 param secretName string
 
