@@ -71,7 +71,7 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
     }
   }
 
-resource apiApp 'Microsoft.App/containerApps@2022-03-01' = {
+resource apiApp 'Microsoft.App/containerApps@2023-05-01' = {
   name:'${prefix}-api-container'
   location: location
   properties:{
