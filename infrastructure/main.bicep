@@ -28,12 +28,12 @@ param certKeyVaultUrl string
 param containerRegistryName string
 param containerRegistryUsername string
 #disable-next-line secure-secrets-in-params
-param secretKeyVaultId string
+param existingKeyVaultId string
 param secretName string
 
-var secretKeyVaultName = split(secretKeyVaultId, '/')[8]
-var secretKeyVaultResourceGroup = split(secretKeyVaultId, '/')[4]
-var secretKeyVautlSubscriptionId = split(secretKeyVaultId, '/')[2]
+var secretKeyVaultName = split(existingKeyVaultId, '/')[8]
+var secretKeyVaultResourceGroup = split(existingKeyVaultId, '/')[4]
+var secretKeyVautlSubscriptionId = split(existingKeyVaultId, '/')[2]
 
 resource kv 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
  name: secretKeyVaultName

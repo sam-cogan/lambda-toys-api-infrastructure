@@ -40,7 +40,7 @@ resource env 'Microsoft.App/managedEnvironments@2023-05-01' = {
      infrastructureSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'acaControlPlaneSubnet')
     }
   }
-  resource daprStateStore 'daprComponents@2022-03-01' = {
+  resource daprStateStore 'daprComponents@2023-05-01' = {
       name: 'statestore'
       properties:{
         componentType: 'state.azure.cosmosdb'
