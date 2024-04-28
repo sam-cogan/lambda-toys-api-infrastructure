@@ -20,7 +20,7 @@ param vnetSettings object = {
   ]
 }
 
-resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
+resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2023-04-01' = {
   name: '${prefix}-default-nsg'
   location: location
   properties: {
@@ -44,7 +44,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-08-0
 }
 
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${prefix}-vnet'
   location: location
   properties: {
@@ -64,7 +64,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   }
 }
 
-resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' = {
+resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-11-15' = {
   name: '${prefix}-cosmos-account'
   location: location
   kind: 'GlobalDocumentDB'
@@ -89,7 +89,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' = {
   }
 }
 
-resource sqlDb 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2021-06-15' = {
+resource sqlDb 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023-11-15' = {
   name: '${prefix}-sqldb'
   parent: cosmosDbAccount
   properties: {
@@ -99,7 +99,7 @@ resource sqlDb 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2021-06-15' =
   }
 }
 
-resource sqlContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2021-06-15' = {
+resource sqlContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2023-11-15' = {
   parent: sqlDb 
   name: '${prefix}-orders'
   properties: {
@@ -115,7 +115,7 @@ resource sqlContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/co
   }
 }
 
-resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2021-06-15' = {
+resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2023-11-15' = {
   parent: sqlDb 
   name: '${prefix}-state'
   properties: {
@@ -131,7 +131,7 @@ resource stateContainerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/
   }
 }
 
-module cosmosPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint:v1' ={
+module cosmosPrivateLink '../modules/private-endpoint.bicep' ={
   name: 'cosmosPrivateLink'
   params:{
     location:location
@@ -146,7 +146,7 @@ module cosmosPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint:v
   }
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: '${prefix}-kv'
   location: location
   properties: {
@@ -162,7 +162,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
-module keyVaultPrivateLink 'br:bicepreg.azurecr.io/bicep/modules/privateendpoint:v1' ={
+module keyVaultPrivateLink '../modules/private-endpoint.bicep' ={
   name: 'keyVaultPrivateLink'
   params:{
     location:location

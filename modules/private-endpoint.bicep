@@ -23,7 +23,7 @@ resource privateDnsNetworkLink 'Microsoft.Network/privateDnsZones/virtualNetwork
   }
 }
 
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01'  = {
+resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01'  = {
   name: '${name}-pe'
   location: location
   properties: {
@@ -44,7 +44,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01'  = {
   }
 }
 
-resource privateEndpointDnsLink 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-03-01' = {
+resource privateEndpointDnsLink 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-04-01' = {
   name:'${name}-pe-dns'
   parent: privateEndpoint
   properties: {

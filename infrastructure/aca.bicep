@@ -10,7 +10,7 @@ param cosmosAccountName string
 param cosmosDbName string
 param cosmosContainerName string
 
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${prefix}-la-workspace'
   location: location
   properties: {
@@ -25,7 +25,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' exis
 }
 var cosmosDbKey = cosmosDbAccount.listKeys().primaryMasterKey
 
-resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
+resource env 'Microsoft.App/managedEnvironments@2023-05-01' = {
   name: '${prefix}-container-env'
   location: location
   properties:{
@@ -37,11 +37,10 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
       }
     }
    vnetConfiguration:{
-     runtimeSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'acaAppSubnet')
      infrastructureSubnetId: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName,'acaControlPlaneSubnet')
     }
   }
-  resource daprStateStore 'daprComponents@2022-03-01' = {
+  resource daprStateStore 'daprComponents@2023-05-01' = {
       name: 'statestore'
       properties:{
         componentType: 'state.azure.cosmosdb'
@@ -71,7 +70,7 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
     }
   }
 
-resource apiApp 'Microsoft.App/containerApps@2022-03-01' = {
+resource apiApp 'Microsoft.App/containerApps@2023-05-01' = {
   name:'${prefix}-api-container'
   location: location
   properties:{
