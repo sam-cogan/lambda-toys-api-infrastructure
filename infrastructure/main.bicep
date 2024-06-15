@@ -1,6 +1,8 @@
+import * as types from 'types.bicep'
+
 param location string
 param prefix string
-param vnetSettings object = {
+param vnetSettings types.vnetSettings = {
   addressPrefixes: [
     '10.0.0.0/19'
   ]
@@ -85,4 +87,15 @@ module apim 'apim.bicep'={
 
   }
 
+}
+
+module entraIdResources 'entra.bicep'={
+  name: 'entra'
+  dependsOn:[
+    core
+  ]
+  params:{
+    keyVaultName: secretKeyVaultName
+  }
+  scope: resourceGroup(secretKeyVautlSubscriptionId, secretKeyVaultResourceGroup)
 }
